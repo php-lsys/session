@@ -107,11 +107,11 @@ abstract class Session {
 	/**
 	 * Sets the last_active timestamp and saves the session.
 	 *
-	 *     $session->write_close();
+	 *     $session->writeClose();
 	 *
 	 * @return  boolean
 	 */
-	abstract public function write_close();
+	abstract public function writeClose();
 	/**
 	 * Completely destroy the current session.
 	 *
