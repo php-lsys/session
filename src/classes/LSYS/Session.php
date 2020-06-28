@@ -25,7 +25,7 @@ abstract class Session {
 	 * @return  Session
 	 * @uses    ::$config
 	 */
-    public static function factory(Config $config,$id = NULL)
+    public static function factory(Config $config,?string $id = NULL)
 	{
 		$_id=strval($id);
 		$class = $config->get("handler");
@@ -47,7 +47,7 @@ abstract class Session {
 	 * @return  void
 	 * @uses    Session::read
 	 */
-	public function __construct(Config $config,$id=null)
+	public function __construct(Config $config,?string $id=null)
 	{
 	    $this->_config=$config;
 		$this->_id=$id;
@@ -59,7 +59,7 @@ abstract class Session {
 	 *
 	 * @return  string
 	 */
-	public function id()
+	public function id():string
 	{
 	    return $this->_id;
 	}
@@ -74,7 +74,7 @@ abstract class Session {
 	 *
 	 * @return  string
 	 */
-	abstract public function name();
+	abstract public function name():string;
 	/**
 	 * Get a variable from the session array.
 	 *
@@ -84,7 +84,7 @@ abstract class Session {
 	 * @param   mixed   $default    default value to return
 	 * @return  mixed
 	 */
-	abstract public function get($key, $default = NULL);
+	abstract public function get(string $key, $default = NULL);
 	/**
 	 * Set a variable in the session array.
 	 *
@@ -94,7 +94,7 @@ abstract class Session {
 	 * @param   mixed   $value  value
 	 * @return  $this
 	 */
-	abstract public function set($key, $value);
+	abstract public function set(string $key, $value);
 	/**
 	 * Removes a variable in the session array.
 	 *
@@ -103,7 +103,7 @@ abstract class Session {
 	 * @param   string  $key,...    variable name
 	 * @return  $this
 	 */
-	abstract public function delete($key);
+	abstract public function delete(string $key);
 	/**
 	 * Sets the last_active timestamp and saves the session.
 	 *
@@ -111,7 +111,7 @@ abstract class Session {
 	 *
 	 * @return  boolean
 	 */
-	abstract public function writeClose();
+	abstract public function writeClose():bool;
 	/**
 	 * Completely destroy the current session.
 	 *
@@ -119,7 +119,7 @@ abstract class Session {
 	 *
 	 * @return  boolean
 	 */
-	abstract public function destroy();
+	abstract public function destroy():bool;
 	/**
 	 * Restart the session.
 	 *
@@ -127,11 +127,11 @@ abstract class Session {
 	 *
 	 * @return  boolean
 	 */
-	abstract public function restart();
+	abstract public function restart():bool;
 	/**
 	 * Generate a new session id and return it.
 	 *
 	 * @return  string
 	 */
-	abstract public function regenerate();
+	abstract public function regenerate():string;
 }

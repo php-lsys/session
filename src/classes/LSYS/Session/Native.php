@@ -12,7 +12,7 @@ class Native extends \LSYS\Session {
 	 * @param Config $config
 	 * @param string $id
 	 */
-	public function __construct(Config $config,$id=null)
+	public function __construct(Config $config,?string $id=null)
 	{
 		parent::__construct($config,$id);
 		if (session_status()==PHP_SESSION_NONE){
@@ -44,18 +44,18 @@ class Native extends \LSYS\Session {
 	/**
 	 * @return  string
 	 */
-	public function id()
+	public function id():string
 	{
 		return session_id();
 	}
-	public function name()
+	public function name():string
 	{
 		return session_name();
 	}
 	/**
 	 * @return  string
 	 */
-	public function regenerate()
+	public function regenerate():string
 	{
 		$this->start();
 		session_regenerate_id();
@@ -64,7 +64,7 @@ class Native extends \LSYS\Session {
 	/**
 	 * @return  bool
 	 */
-	public function writeClose()
+	public function writeClose():bool
 	{
 		session_write_close();
 		return TRUE;
@@ -72,7 +72,7 @@ class Native extends \LSYS\Session {
 	/**
 	 * @return  bool
 	 */
-	public function restart()
+	public function restart():bool
 	{
 		$this->start();
 		if(!headers_sent()){
@@ -85,7 +85,7 @@ class Native extends \LSYS\Session {
 	/**
 	 * @return  bool
 	 */
-	public function destroy()
+	public function destroy():bool
 	{
 		$this->start();
 		session_destroy();
@@ -100,18 +100,18 @@ class Native extends \LSYS\Session {
 		}
 		return true;
 	}
-	public function get($key, $default = NULL)
+	public function get(string $key, $default = NULL)
 	{
 		$this->start();
 		return array_key_exists($key, $_SESSION) ? $_SESSION[$key] : $default;
 	}
-	public function set($key, $value)
+	public function set(string $key, $value)
 	{
 		$this->start();
 		$_SESSION[$key] = $value;
 		return $this;
 	}
-	public function delete($key)
+	public function delete(string $key)
 	{
 		$this->start();
 		$args = func_get_args();
